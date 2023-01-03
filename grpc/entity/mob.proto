@@ -1,0 +1,43 @@
+syntax = "proto3";
+
+package grpc.entity.v1;
+option go_package = "github.com/medieval-life/entity-pkg/entity-service";
+
+message Mob{
+  string id = 1;
+  string name = 2;
+  float exp = 3;
+  float attack = 4;
+  float defense = 5;
+}
+
+message CreateMobDto{
+  string name = 2;
+  float exp = 3;
+  float attack = 4;
+  float defense = 5;
+}
+
+message MobBase{
+  string name = 2;
+  float exp = 3;
+  float attack = 4;
+  float defense = 5;
+}
+
+message GetMobsRequestDto{
+  int64 page = 1;
+  int64 pageSize = 2;
+}
+
+message ReceiveMobsDto{
+  repeated Mob mobs = 1;
+  int64 page = 2;
+  int64 pageSize = 3;
+  int64 count = 4;
+}
+
+service MobService{
+  rpc CreateMob(CreateMobDto) returns (Mob);
+  rpc GetMobs(GetMobsRequestDto) returns (ReceiveMobsDto);
+}
